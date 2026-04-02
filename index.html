@@ -915,3 +915,362 @@ buttons.forEach(btn => {
 </html>
 
 
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f3f3f3;
+}
+
+/* FILTER AREA */
+.filters{
+  padding:20px 15px 5px;
+}
+
+/* CENTER GRID LIKE IMAGE */
+.filter-row{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:15px;
+}
+
+.filter-btn{
+  padding:10px 18px;
+  border-radius:22px;
+  border:1px solid #ddd;
+  background:#fff;
+  font-weight:600;
+  font-size:14px;
+  cursor:pointer;
+  min-width:70px;
+  text-align:center;
+}
+
+.filter-btn.active{
+  background:#e31b23;
+  color:#fff;
+  border:none;
+}
+
+/* PRODUCT GRID */
+.products{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  padding:15px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* IMAGE */
+.card img{
+  width:100%;
+  height:170px;
+  object-fit:cover;
+}
+
+/* CONTENT */
+.card-content{
+  padding:14px;
+}
+
+/* TEAM TAG */
+.tag{
+  display:inline-block;
+  padding:5px 12px;
+  border-radius:14px;
+  font-size:12px;
+  background:#ffe6e6;
+  color:#e31b23;
+  margin-bottom:6px;
+}
+
+/* TITLE */
+.title{
+  font-size:16px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+/* PRICE ROW */
+.price-row{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-bottom:12px;
+}
+
+.price{
+  color:#e31b23;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.old-price{
+  text-decoration:line-through;
+  color:#888;
+  font-size:14px;
+}
+
+.discount{
+  margin-left:auto;
+  background:#ffe6e6;
+  color:#e31b23;
+  font-size:12px;
+  padding:4px 8px;
+  border-radius:8px;
+}
+
+/* BUTTON */
+.buy-btn{
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:14px;
+  background:#e31b23;
+  color:#fff;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* MOBILE POLISH */
+@media(max-width:400px){
+  .products{
+    gap:12px;
+  }
+  .card img{
+    height:150px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="filters">
+
+  <!-- CATEGORY -->
+  <div class="filter-row">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Jerseys</button>
+    <button class="filter-btn">T-Shirts</button>
+    <button class="filter-btn">Caps</button>
+    <button class="filter-btn">Flags</button>
+    <button class="filter-btn">Combo</button>
+  </div>
+
+  <!-- TEAMS -->
+  <div class="filter-row">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">RCB</button>
+    <button class="filter-btn">MI</button>
+    <button class="filter-btn">CSK</button>
+    <button class="filter-btn">KKR</button>
+    <button class="filter-btn">SRH</button>
+    <button class="filter-btn">RR</button>
+    <button class="filter-btn">DC</button>
+    <button class="filter-btn">LSG</button>
+    <button class="filter-btn">GT</button>
+    <button class="filter-btn">PBKS</button>
+  </div>
+
+</div>
+
+<div class="products">
+
+  <!-- CARD 1 -->
+  <div class="card" data-team="RCB">
+    <img src="https://i.ibb.co/tMs0Hc14/merch-rcb-jersey-1-By-Xfx-Kgm.jpg">
+    <div class="card-content">
+      <div class="tag">RCB</div>
+      <div class="title">RCB Fan T-Shirt</div>
+      <div class="price-row">
+        <div class="price">₹600</div>
+        <div class="old-price">₹1,200</div>
+        <div class="discount">50% OFF</div>
+      </div>
+      <button class="buy-btn" onclick="buy()">Buy Now</button>
+    </div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="card" data-team="MI">
+    <img src="https://i.ibb.co/F4zKQd3W/merch-mi-jersey-1-BSTi-P0xn.jpg">
+    <div class="card-content">
+      <div class="tag">MI</div>
+      <div class="title">MI Fan T-Shirt</div>
+      <div class="price-row">
+        <div class="price">₹600</div>
+        <div class="old-price">₹1,200</div>
+        <div class="discount">50% OFF</div>
+      </div>
+      <button class="buy-btn" onclick="buy()">Buy Now</button>
+    </div>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="card" data-team="RCB">
+    <img src="https://i.ibb.co/Z1H4Tsr9/merch-csk-tshirt-1-Bav-Yv-K4.jpg">
+    <div class="card-content">
+      <div class="tag">CSK</div>
+      <div class="title">CSK Fan T-Shirt</div>
+      <div class="price-row">
+        <div class="price">₹600</div>
+        <div class="old-price">₹1,200</div>
+        <div class="discount">50% OFF</div>
+      </div>
+      <button class="buy-btn" onclick="buy()">Buy Now</button>
+    </div>
+  </div>
+
+  <!-- CARD 4 -->
+  <div class="card" data-team="MI">
+    <img src="https://i.ibb.co/RTtXXB0K/merch-kkr-tshirt-1-Cx-LQt1dd.jpg">
+    <div class="card-content">
+      <div class="tag">KKR</div>
+      <div class="title">KKR Fan T-Shirt</div>
+      <div class="price-row">
+        <div class="price">₹600</div>
+        <div class="old-price">₹1,200</div>
+        <div class="discount">50% OFF</div>
+      </div>
+      <button class="buy-btn" onclick="buy()">Buy Now</button>
+    </div>
+  </div>
+
+  <!-- CARD 5 -->
+  <div class="card" data-team="RCB">
+    <img src="https://i.ibb.co/G45GHZSR/merch-dc-tshirt-1-x876qe3c.jpg">
+    <div class="card-content">
+      <div class="tag">DC</div>
+      <div class="title">DC Fan T-Shirt</div>
+      <div class="price-row">
+        <div class="price">₹600</div>
+        <div class="old-price">₹1,200</div>
+        <div class="discount">50% OFF</div>
+      </div>
+      <button class="buy-btn" onclick="buy()">Buy Now</button>
+    </div>
+  </div>
+
+  <!-- CARD 6 -->
+  <div class="card" data-team="MI">
+    <img src="https://i.ibb.co/0y9YRtgn/merch-lsg-tshirt-1-Pmg-Ey-Ri-Q.jpg">
+    <div class="card-content">
+      <div class="tag">LSG</div>
+      <div class="title">LSG Fan T-Shirt</div>
+      <div class="price-row">
+        <div class="price">₹600</div>
+        <div class="old-price">₹1,200</div>
+        <div class="discount">50% OFF</div>
+      </div>
+      <button class="buy-btn" onclick="buy()">Buy Now</button>
+    </div>
+  </div>
+
+  <!-- CARD 7 -->
+  <div class="card" data-team="RCB">
+    <img src="https://i.ibb.co/PZK0VhBt/merch-gt-tshirt-1-Bw-Htfuk-X.jpg">
+    <div class="card-content">
+      <div class="tag">GT</div>
+      <div class="title">GT Fan T-Shirt</div>
+      <div class="price-row">
+        <div class="price">₹600</div>
+        <div class="old-price">₹1,200</div>
+        <div class="discount">50% OFF</div>
+      </div>
+      <button class="buy-btn" onclick="buy()">Buy Now</button>
+    </div>
+  </div>
+
+  <!-- CARD 8 -->
+  <div class="card" data-team="MI">
+    <img src="https://i.ibb.co/N6d6B448/merch-pbks-tshirt-1-2-Vb-do1g.jpg">
+    <div class="card-content">
+      <div class="tag">PBKS</div>
+      <div class="title">PBKS Fan T-Shirt</div>
+      <div class="price-row">
+        <div class="price">₹600</div>
+        <div class="old-price">₹1,200</div>
+        <div class="discount">50% OFF</div>
+      </div>
+      <button class="buy-btn" onclick="buy()">Buy Now</button>
+    </div>
+  </div>
+
+
+  <!-- CARD 9 -->
+  <div class="card" data-team="RCB">
+    <img src="https://i.ibb.co/zWrYz0dL/merch-mi-cap-1-C4-QRd8zx.jpg">
+    <div class="card-content">
+      <div class="tag">MI</div>
+      <div class="title">MI Official Cap</div>
+      <div class="price-row">
+        <div class="price">₹600</div>
+        <div class="old-price">₹1,200</div>
+        <div class="discount">50% OFF</div>
+      </div>
+      <button class="buy-btn" onclick="buy()">Buy Now</button>
+    </div>
+  </div>
+
+  <!-- CARD 10 -->
+  <div class="card" data-team="MI">
+    <img src="https://i.ibb.co/fGnrq0H9/merch-csk-jersey-5-CHTws-CMW.jpg">
+    <div class="card-content">
+      <div class="tag">CSK</div>
+      <div class="title">CSK Combo (Cap + Jersey + Shoes)</div>
+      <div class="price-row">
+        <div class="price">₹600</div>
+        <div class="old-price">₹1,200</div>
+        <div class="discount">50% OFF</div>
+      </div>
+      <button class="buy-btn" onclick="buy()">Buy Now</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+// BUY REDIRECT
+function buy(){
+  window.location.href="https://booking-details-page-the-book-my-show--in.pages.dev/";
+}
+
+// TEAM FILTER
+const teamBtns = document.querySelectorAll(".filters .filter-row:nth-child(2) .filter-btn");
+const cards = document.querySelectorAll(".card");
+
+teamBtns.forEach(btn=>{
+  btn.onclick = () => {
+
+    teamBtns.forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const team = btn.innerText;
+
+    cards.forEach(card=>{
+      card.style.display =
+        (team==="All" || card.dataset.team===team)
+        ? "block" : "none";
+    });
+
+  }
+});
+
+</script>
+
+</body>
+</html>
+
