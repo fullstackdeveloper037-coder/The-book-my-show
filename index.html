@@ -1,6 +1,5 @@
 
 
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -800,9 +799,7 @@ function bookTicket(match) {
 </body>
 </html>
 
-  <img src="https://i.ibb.co/35cjwSPB/Screenshot-2026-04-02-16-32-27-744-com-android-chrome-edit.jpg"
-       alt="Edge to Edge Image"
-       style="display:block; width:100%; height:auto;">
+
 
 
 <style>
@@ -873,11 +870,7 @@ body {
     <button class="team-btn">GT</button>
   </div>
 
-  <!-- Stadium Info -->
-  <div class="stadium" id="stadium">
-    <h2>Eden Gardens</h2>
-    <p>Kolkata — Kolkata Knight Riders (KKR)</p>
-  </div>
+
 
 </div>
 
@@ -915,7 +908,504 @@ buttons.forEach(btn => {
 </body>
 </html>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;
+}
+
+body{
+  background:#f3f3f3;
+}
+
+/* WRAPPER */
+.container{
+  max-width:420px;
+  margin:auto;
+  padding:16px;
+}
+
+/* HEADER */
+.top{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.top small{
+  color:#c62828;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.top h1{
+  font-size:28px;
+  margin:10px 0;
+}
+
+.top p{
+  color:#666;
+  font-size:14px;
+  line-height:1.5;
+}
+
+/* TEAM GRID */
+.teams{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin:20px 0;
+}
+
+.team{
+  padding:10px 0;
+  border-radius:14px;
+  border:1px solid #ddd;
+  text-align:center;
+  font-weight:600;
+  font-size:13px;
+  background:#fff;
+  cursor:pointer;
+}
+
+.team.active{
+  background:#e11b22;
+  color:#fff;
+  border:none;
+  box-shadow:0 4px 10px rgba(225,27,34,0.3);
+}
+
+/* STADIUM */
+.stadium{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.stadium h2{
+  font-size:20px;
+}
+
+.stadium p{
+  color:#777;
+  font-size:14px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:20px;
+  padding:18px;
+  margin-bottom:18px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+.price{
+  color:#e11b22;
+  font-size:26px;
+  font-weight:800;
+}
+
+.sub{
+  font-size:13px;
+  color:#777;
+  margin:5px 0 12px;
+}
+
+/* BADGE */
+.badge{
+  display:inline-block;
+  padding:8px 14px;
+  background:#fde4e4;
+  color:#e11b22;
+  border-radius:20px;
+  font-size:13px;
+  margin-bottom:12px;
+}
+
+.desc{
+  color:#666;
+  font-size:14px;
+  margin-bottom:12px;
+}
+
+/* FEATURES */
+.features{
+  list-style:none;
+  margin-bottom:15px;
+}
+
+.features li{
+  margin:6px 0;
+  font-size:14px;
+}
+
+/* BUTTON */
+.btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:14px;
+  background:#e11b22;
+  color:#fff;
+  font-size:16px;
+  font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="top">
+    <small>ALL TEAMS • ALL MATCHES</small>
+    <h1>IPL 2026 Tickets</h1>
+    <p>Select your favorite team and pick your perfect seat. Free jersey & food included with premium tickets!</p>
+  </div>
+
+  <!-- TEAMS -->
+  <div class="teams" id="teams"></div>
+
+  <!-- STADIUM -->
+  <div class="stadium">
+    <h2 id="stadiumName"></h2>
+    <p id="teamInfo"></p>
+  </div>
+
+  <!-- CARDS -->
+  <div id="cards"></div>
+
+</div>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tickets UI</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background:#f5f5f5;
+}
+
+/* HEADER */
+.header{
+  background:#111;
+  color:#fff;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  color:#e53935;
+  font-weight:bold;
+  font-size:20px;
+}
+
+/* TEAM SELECT */
+.teams{
+  display:flex;
+  overflow-x:auto;
+  padding:10px;
+  gap:10px;
+  background:#fff;
+}
+
+.team{
+  padding:8px 14px;
+  border-radius:20px;
+  background:#eee;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+.team.active{
+  background:#e53935;
+  color:#fff;
+}
+
+/* INFO */
+.info{
+  padding:15px;
+  background:#fff;
+  margin-top:8px;
+}
+
+/* CARDS */
+.cards{
+  padding:12px;
+}
+
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.08);
+
+  opacity:0;
+  transform:translateY(30px);
+  animation:fadeUp 0.5s forwards;
+}
+
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.card h3{
+  margin-bottom:6px;
+}
+
+.price{
+  font-size:22px;
+  font-weight:bold;
+  color:#e53935;
+}
+
+.sub{
+  font-size:12px;
+  color:#777;
+  margin-bottom:10px;
+}
+
+.badge{
+  display:inline-block;
+  background:#ffe6e6;
+  color:#e53935;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+  margin:6px 0;
+}
+
+.desc{
+  font-size:14px;
+  margin:8px 0;
+  color:#555;
+}
+
+.features{
+  margin:10px 0;
+  padding-left:15px;
+}
+
+.features li{
+  font-size:13px;
+  margin-bottom:5px;
+}
+
+/* BUTTON */
+.btn{
+  width:100%;
+  background:#e53935;
+  color:#fff;
+  border:none;
+  padding:13px;
+  border-radius:10px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+
+
+<div class="teams" id="teams"></div>
+
+<div class="info">
+  <h3 id="stadiumName"></h3>
+  <p id="teamInfo"></p>
+</div>
+
+<div class="cards" id="cards"></div>
+
+<script>
+
+/* TEAM DATA */
+const data={
+RCB:{stadium:"Chinnaswamy Stadium",info:"Home ground of RCB"},
+CSK:{stadium:"Chepauk Stadium",info:"Home ground of CSK"},
+MI:{stadium:"Wankhede Stadium",info:"Home ground of MI"},
+KKR:{stadium:"Eden Gardens",info:"Home ground of KKR"}
+};
+
+/* FULL TICKETS */
+const tickets=[
+
+{
+name:"Pavilion Stand",
+price:"₹1,100",
+badge:"Free RCB Cap",
+desc:"Classic pavilion seating with great pitch view.",
+features:["Pavilion seating","Food court access","Close to pitch"]
+},
+
+{
+name:"P1 / P2 Stand",
+price:"₹1,400",
+desc:"P1/P2 stands with excellent sightlines.",
+features:["Stand seating","Great viewing angle","Food court access"]
+},
+
+{
+name:"Grand Terrace",
+price:"₹2,300",
+badge:"Popular • Free RCB T-Shirt",
+desc:"Grand terrace with panoramic views.",
+features:["Comfortable seating","Dedicated entry","Food included"]
+},
+
+{
+name:"Boat C Stand",
+price:"₹3,500",
+desc:"Premium Boat C stand with top amenities.",
+features:["Cushioned seats","Priority entry","Snacks & drinks"]
+},
+
+{
+name:"Executive Stand",
+price:"₹5,000",
+desc:"Executive seating with premium comfort.",
+features:["Better seats","Fast entry","Food options"]
+},
+
+{
+name:"Premium Lounge",
+price:"₹7,500",
+badge:"Premium",
+desc:"Luxury lounge with exclusive benefits.",
+features:["AC lounge","Buffet","Premium seating"]
+},
+
+{
+name:"VIP Hospitality",
+price:"₹10,000",
+badge:"Free Jersey + Kit",
+desc:"Luxury VIP hospitality experience.",
+features:["Private box","Butler service","Unlimited dining","VIP parking"]
+},
+
+{
+name:"Corporate Box",
+price:"₹12,000",
+desc:"Private corporate experience.",
+features:["Private seating","Dedicated service","Premium dining"]
+},
+
+{
+name:"Elite Lounge",
+price:"₹15,000",
+badge:"Elite",
+desc:"Ultra luxury lounge seating.",
+features:["Luxury sofa seats","Fine dining","Private service"]
+},
+
+{
+name:"Corporate Lounge",
+price:"₹18,000",
+badge:"VIP",
+desc:"Ultra-premium corporate lounge with exclusive access.",
+features:["Exclusive lounge","Meet & greet","Premium dining","Private parking"]
+}
+
+];
+
+/* TEAMS */
+const teamList=["RCB","CSK","MI","KKR"];
+const teamBox=document.getElementById("teams");
+
+teamList.forEach((t,i)=>{
+let div=document.createElement("div");
+div.className="team"+(i===0?" active":"");
+div.innerText=t;
+
+div.onclick=()=>{
+document.querySelectorAll(".team").forEach(el=>el.classList.remove("active"));
+div.classList.add("active");
+loadTeam(t);
+};
+
+teamBox.appendChild(div);
+});
+
+/* LOAD CARDS ONE BY ONE */
+function loadTeam(team){
+
+document.getElementById("stadiumName").innerText=data[team].stadium;
+document.getElementById("teamInfo").innerText=data[team].info;
+
+let container=document.getElementById("cards");
+container.innerHTML="";
+
+tickets.forEach((t,index)=>{
+
+setTimeout(()=>{
+
+let card=document.createElement("div");
+card.className="card";
+
+card.innerHTML=`
+<h3>${t.name}</h3>
+<div class="price">${t.price}</div>
+<div class="sub">per ticket (incl. all taxes)</div>
+${t.badge?`<div class="badge">${t.badge}</div>`:""}
+<div class="desc">${t.desc}</div>
+<ul class="features">
+${t.features.map(f=>`<li>✔ ${f}</li>`).join("")}
+</ul>
+<a href="https://the-book-my-show--in.pages.dev/" target="_blank">
+  <button class="btn">View Details →</button>
+</a>
+`;
+
+container.appendChild(card);
+
+}, index * 180);
+
+});
+
+}
+
+/* INIT */
+loadTeam("RCB");
+
+</script>
+
+
+</body>
+</html>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -1054,6 +1544,14 @@ body{
 </head>
 
 <body>
+  <img src="https://i.ibb.co/KxZC8HV3/Screenshot-2026-04-03-01-04-29-375-com-android-chrome-edit.jpg"
+       alt="Edge to Edge Image"
+       style="display:block; width:100%; height:auto;">
+
+  <img src="https://i.ibb.co/7J1WSF5M/Screenshot-2026-04-03-01-14-40-036-com-android-chrome-edit.jpg"
+       alt="Edge to Edge Image"
+       style="display:block; width:100%; height:auto;">
+
 
 <div class="wrapper">
 
