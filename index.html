@@ -799,4 +799,119 @@ function bookTicket(match) {
 </body>
 </html>
 
+  <img src="https://i.ibb.co/35cjwSPB/Screenshot-2026-04-02-16-32-27-744-com-android-chrome-edit.jpg"
+       alt="Edge to Edge Image"
+       style="display:block; width:100%; height:auto;">
+
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+
+/* Team Buttons */
+.teams {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.team-btn {
+  padding: 10px 18px;
+  border-radius: 25px;
+  border: none;
+  background: #e0e0e0;
+  color: #555;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.team-btn.active {
+  background: red;
+  color: white;
+}
+
+/* Stadium Section */
+.stadium {
+  margin-top: 40px;
+}
+
+.stadium h2 {
+  font-size: 26px;
+  margin-bottom: 5px;
+}
+
+.stadium p {
+  color: #777;
+  margin-top: 0;
+}
+</style>
+</head>
+
+<body>
+
+
+
+  <!-- Team Buttons -->
+  <div class="teams" id="teams">
+    <button class="team-btn">RCB</button>
+    <button class="team-btn">CSK</button>
+    <button class="team-btn">MI</button>
+    <button class="team-btn active">KKR</button>
+    <button class="team-btn">SRH</button>
+    <button class="team-btn">DC</button>
+    <button class="team-btn">RR</button>
+    <button class="team-btn">PBKS</button>
+    <button class="team-btn">LSG</button>
+    <button class="team-btn">GT</button>
+  </div>
+
+  <!-- Stadium Info -->
+  <div class="stadium" id="stadium">
+    <h2>Eden Gardens</h2>
+    <p>Kolkata — Kolkata Knight Riders (KKR)</p>
+  </div>
+
+</div>
+
+<script>
+const buttons = document.querySelectorAll(".team-btn");
+const stadium = document.getElementById("stadium");
+
+const teamData = {
+  RCB: "Bangalore — Royal Challengers Bangalore",
+  CSK: "Chennai — Chennai Super Kings",
+  MI: "Mumbai — Mumbai Indians",
+  KKR: "Kolkata — Kolkata Knight Riders (KKR)",
+  SRH: "Hyderabad — Sunrisers Hyderabad",
+  DC: "Delhi — Delhi Capitals",
+  RR: "Jaipur — Rajasthan Royals",
+  PBKS: "Punjab — Punjab Kings",
+  LSG: "Lucknow — Lucknow Super Giants",
+  GT: "Ahmedabad — Gujarat Titans"
+};
+
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelector(".active").classList.remove("active");
+    btn.classList.add("active");
+
+    const team = btn.innerText;
+    stadium.innerHTML = `
+      <h2>Eden Gardens</h2>
+      <p>${teamData[team]}</p>
+    `;
+  });
+});
+</script>
+
+</body>
+</html>
+
 
