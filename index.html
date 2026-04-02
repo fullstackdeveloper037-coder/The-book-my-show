@@ -1274,3 +1274,304 @@ teamBtns.forEach(btn=>{
 </body>
 </html>
 
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+body{
+  background:#f2f2f2;
+  padding:16px;
+}
+
+/* TEAM GRID */
+.teams{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:26px;
+}
+
+.team{
+  height:46px;
+  background:#fff;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  font-weight:600;
+  border:1px solid #ddd;
+  color:#333;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.team img{
+  width:16px;
+}
+
+.team.active{
+  background:#e11b22;
+  color:#fff;
+  border:none;
+  box-shadow:0 6px 14px rgba(225,27,34,0.25);
+}
+
+.team.full{
+  grid-column:span 3;
+  width:120px;
+  justify-self:center;
+}
+
+/* STADIUM */
+.stadium{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.stadium h2{
+  font-size:22px;
+  font-weight:700;
+}
+
+.stadium p{
+  font-size:14px;
+  color:#777;
+  margin-top:5px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:18px 16px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.06);
+  margin-bottom:18px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.card.selected{
+  border:2px solid #e11b22;
+}
+
+.card h3{
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+.price{
+  font-size:30px;
+  font-weight:800;
+  color:#e11b22;
+}
+
+.sub{
+  font-size:13px;
+  color:#777;
+  margin:4px 0 12px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 12px;
+  border-radius:20px;
+  background:#ffe8e8;
+  color:#e11b22;
+  font-size:13px;
+  margin-bottom:14px;
+}
+
+.badge img{
+  width:14px;
+}
+
+.desc{
+  font-size:14px;
+  color:#666;
+  margin-bottom:12px;
+}
+
+.features{
+  list-style:none;
+  margin-bottom:14px;
+}
+
+.features li{
+  display:flex;
+  align-items:center;
+  margin:6px 0;
+  font-size:14px;
+}
+
+.features img{
+  width:14px;
+  margin-right:8px;
+}
+
+.btn{
+  width:100%;
+  height:48px;
+  border-radius:14px;
+  background:#e11b22;
+  color:#fff;
+  border:none;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.details{
+  display:none;
+  margin-top:12px;
+  font-size:14px;
+  color:#555;
+}
+</style>
+</head>
+
+<body>
+
+<div class="teams" id="teams"></div>
+
+<div class="stadium">
+  <h2 id="stadiumName"></h2>
+  <p id="teamInfo"></p>
+</div>
+
+<div id="cards"></div>
+
+<script>
+const iconLocation="https://cdn-icons-png.flaticon.com/512/684/684908.png";
+const iconGift="https://cdn-icons-png.flaticon.com/512/747/747376.png";
+const iconTick="https://cdn-icons-png.flaticon.com/512/845/845646.png";
+
+/* COMPLETE DATA */
+const data={
+RCB:{stadium:"M. Chinnaswamy Stadium",info:"Bangalore — Royal Challengers Bengaluru (RCB)"},
+CSK:{stadium:"M. A. Chidambaram Stadium",info:"Chennai — Chennai Super Kings (CSK)"},
+MI:{stadium:"Wankhede Stadium",info:"Mumbai — Mumbai Indians (MI)"},
+KKR:{stadium:"Eden Gardens",info:"Kolkata — Kolkata Knight Riders (KKR)"},
+SRH:{stadium:"Rajiv Gandhi Stadium",info:"Hyderabad — Sunrisers Hyderabad (SRH)"},
+DC:{stadium:"Arun Jaitley Stadium",info:"Delhi — Delhi Capitals (DC)"},
+RR:{stadium:"Sawai Mansingh Stadium",info:"Jaipur — Rajasthan Royals (RR)"},
+PBKS:{stadium:"IS Bindra Stadium",info:"Mohali — Punjab Kings (PBKS)"},
+LSG:{stadium:"Ekana Stadium",info:"Lucknow — Lucknow Super Giants (LSG)"},
+GT:{stadium:"Narendra Modi Stadium",info:"Ahmedabad — Gujarat Titans (GT)"}
+};
+
+/* COMMON TICKETS FOR ALL */
+const tickets=[
+{
+name:"Pavilion Stand",
+price:"₹1,100",
+badge:"Free Team Cap",
+desc:"Classic pavilion seating with great pitch view.",
+features:["Pavilion seating","Food court access","Close to pitch"],
+details:"Premium seating near boundary."
+},
+{
+name:"P1 / P2 Stand",
+price:"₹1,400",
+badge:"Free Jersey",
+desc:"Elevated seating with wide stadium view.",
+features:["Better elevation","Food access","Comfort seating"],
+details:"Balanced seating option."
+},
+{
+name:"Executive Stand",
+price:"₹2,200",
+badge:"VIP Access",
+desc:"Premium comfort seating experience.",
+features:["Cushioned seats","Lounge access","Great view"],
+details:"Best for luxury experience."
+},
+{
+name:"General Stand",
+price:"₹700",
+badge:"Budget",
+desc:"Affordable stadium experience.",
+features:["Budget seating","Large crowd vibe","Basic access"],
+details:"Best for fans on budget."
+}
+];
+
+/* TEAM BUTTONS */
+const teams=["RCB","CSK","MI","KKR","SRH","DC","RR","PBKS","LSG","GT"];
+const teamBox=document.getElementById("teams");
+
+teams.forEach((t,i)=>{
+let div=document.createElement("div");
+div.className="team"+(i===0?" active":"")+(t==="GT"?" full":"");
+div.innerHTML=`<img src="${iconLocation}"> ${t}`;
+div.onclick=()=>selectTeam(t,div);
+teamBox.appendChild(div);
+});
+
+/* SELECT TEAM */
+function selectTeam(team,el){
+document.querySelectorAll(".team").forEach(t=>t.classList.remove("active"));
+el.classList.add("active");
+
+document.getElementById("stadiumName").innerText=data[team].stadium;
+document.getElementById("teamInfo").innerText=data[team].info;
+
+renderCards();
+}
+
+/* RENDER */
+function renderCards(){
+let container=document.getElementById("cards");
+container.innerHTML="";
+
+tickets.forEach(t=>{
+let card=document.createElement("div");
+card.className="card";
+
+card.innerHTML=`
+<h3>${t.name}</h3>
+<div class="price">${t.price}</div>
+<div class="sub">per ticket (incl. all taxes)</div>
+<div class="badge"><img src="${iconGift}">${t.badge}</div>
+<div class="desc">${t.desc}</div>
+<ul class="features">
+${t.features.map(f=>`<li><img src="${iconTick}">${f}</li>`).join("")}
+</ul>
+<button class="btn">View Details</button>
+<div class="details">${t.details}</div>
+`;
+
+card.onclick=(e)=>{
+if(e.target.classList.contains("btn")) return;
+document.querySelectorAll(".card").forEach(c=>c.classList.remove("selected"));
+card.classList.add("selected");
+};
+
+card.querySelector(".btn").onclick=(e)=>{
+e.stopPropagation();
+let d=card.querySelector(".details");
+if(d.style.display==="block"){
+d.style.display="none";
+e.target.innerText="View Details";
+}else{
+d.style.display="block";
+e.target.innerText="Hide Details";
+}
+};
+
+container.appendChild(card);
+});
+}
+
+/* INIT */
+selectTeam("RCB",document.querySelector(".team"));
+</script>
+
+</body>
+</html>
